@@ -1,0 +1,36 @@
+---
+- name: update cache
+  apt:
+    update_cache: yes
+
+- name: update SO
+  apt:
+    name: "*"
+    state: latest
+  
+- name: install packages
+  apt:
+    name:
+      - vim
+      - curl
+      - telnet
+      - unzip
+      - wget
+      - net-tools
+      - htop
+      - nmap
+
+- name: set a hostname
+  hostname:
+    name: web01
+
+- name: add user
+  user:
+    name: caik
+    shell: /bin/bash
+    home: /home/caik
+
+- name: add user for suders
+  lineinfile:
+    dest: /etc/sudoers
+    line: "caik ALL=(ALL:ALL) NOPASSWD: ALL"
